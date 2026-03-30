@@ -79,5 +79,16 @@ public class MarksService {
 
 		return marksResponseDto;
 	}
+	
+	public MarksResponseDto updateById(MarksRequestdto mrd,int id) {
+		MarksModel existing=marksRepo.findById(id).orElseThrow();
+		existing.setMarks(mrd.getMarks());
+		
+		MarksModel saved=marksRepo.save(existing);
+		
+		MarksResponseDto response=modelMapper.map(saved, MarksResponseDto.class);
+		return response;
+		
+	}
 
 }

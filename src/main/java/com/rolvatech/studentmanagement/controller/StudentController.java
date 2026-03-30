@@ -37,5 +37,10 @@ public class StudentController {
 		return studentService.getById(id);
 		
 	}
+	
+	public StudentResponseDto updateById(StudentRequestDto srd,int id) {
+		return studentService.updateById(srd, id);
+		
+	}
 
 }

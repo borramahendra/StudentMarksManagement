@@ -64,5 +64,18 @@ public class StudentService {
 		StudentResponseDto response = modelMapper.map(studentsModel, StudentResponseDto.class);
 		return response;
 	}
+	
+	public StudentResponseDto updateById(StudentRequestDto srd,int id) {
+		
+		StudentsModel existing=studentsRepo.findById(id).orElseThrow();
+		existing.setStudent_name(srd.getStudent_name());
+		existing.setStudent_email(srd.getStudent_email());
+		StudentsModel saved=studentsRepo.save(existing);
+		
+		StudentResponseDto response=modelMapper.map(saved, StudentResponseDto.class);
+		
+		return response;
+		
+	}
 
 }

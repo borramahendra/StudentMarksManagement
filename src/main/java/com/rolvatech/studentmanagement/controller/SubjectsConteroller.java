@@ -35,5 +35,10 @@ public class SubjectsConteroller {
 		return subjectService.getById(id);
 
 	}
+	
+	public SubjectResponceDto updateById(SubjectRequestDto srd,int id) {
+		return subjectService.updateById(srd, id);
+		
+	}
 
 }

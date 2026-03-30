@@ -68,5 +68,17 @@ public class BranchService {
 		
 		return resopnse;
 	}
+	
+	public BranchResponceDto updateById(BranchRequestDto brt,Integer id) {
+		
+		BranchModel existing=BranchRepo.findById(id).orElseThrow();
+		existing.setBranch_name(brt.getBranch_name());
+		BranchModel saved=BranchRepo.save(existing);
+		
+		BranchResponceDto response=modelMapper.map(saved, BranchResponceDto.class);
+		return response;
+		
+		
+	}
 
 }

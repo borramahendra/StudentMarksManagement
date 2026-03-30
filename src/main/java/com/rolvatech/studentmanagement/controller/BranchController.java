@@ -31,5 +31,10 @@ public class BranchController {
 	public BranchResponceDto getById(@PathVariable("id") int id) {
 		return BranchService.getById(id);
 	}
+	
+	public BranchResponceDto updateById(BranchRequestDto brt,Integer id) {
+		return BranchService.updateById(brt, id);
+		
+	}
 
 }
