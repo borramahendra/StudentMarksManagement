@@ -53,5 +53,21 @@ public class CollegeService {
 
 	}
 	
+	public CollegeResponceDto updateById(CollegeRequestDto crd,Integer id) {
+		CollegeModel existing = collegeRepo.findById(id)
+	            .orElseThrow(() -> new RuntimeException("College not found"));
+		
+		  existing.setCollege_Name(crd.getCollege_Name());
+		    existing.setCollege_location(crd.getCollege_location());
+		    
+		    CollegeModel updated = collegeRepo.save(existing);
+		    
+		    CollegeResponceDto response =
+		            modelMapper.map(updated, CollegeResponceDto.class);
+		    
+		    return response;
+		
+	}
+	
 
 }
