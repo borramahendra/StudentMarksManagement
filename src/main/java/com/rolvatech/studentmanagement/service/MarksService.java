@@ -71,7 +71,7 @@ public class MarksService {
 
 	}
 
-	public MarksResponseDto getById(int id) {
+	public MarksResponseDto getById(Integer id) {
 		MarksModel marksModel = marksRepo.findById(id).orElseThrow();
 		MarksResponseDto marksResponseDto = modelMapper.map(marksModel, MarksResponseDto.class);
 		marksResponseDto.setStudent_name(marksModel.getStudentsModel().getStudent_name());
@@ -80,15 +80,30 @@ public class MarksService {
 		return marksResponseDto;
 	}
 	
-	public MarksResponseDto updateById(MarksRequestdto mrd,int id) {
+	public MarksResponseDto updateById(MarksRequestdto mrd,Integer id) {
 		MarksModel existing=marksRepo.findById(id).orElseThrow();
 		existing.setMarks(mrd.getMarks());
 		
 		MarksModel saved=marksRepo.save(existing);
 		
 		MarksResponseDto response=modelMapper.map(saved, MarksResponseDto.class);
+		 response.setStudent_name(saved.getStudentsModel().getStudent_name());
+		    response.setSubject_name(saved.getSubjectsModel().getSubject_name());
+		
+		
 		return response;
 		
 	}
+	
+	public String deleteById(Integer id) {
+		
+		MarksModel existing=marksRepo.findById(id).orElseThrow();
+		marksRepo.delete(existing);
+		
+		return "deleted sucessfully";
+		
+	}
+	
+	
 
 }

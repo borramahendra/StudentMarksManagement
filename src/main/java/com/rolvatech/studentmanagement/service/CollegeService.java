@@ -45,29 +45,35 @@ public class CollegeService {
 	}
 
 	public CollegeResponceDto getById(Integer id) {
-		
-		Optional<CollegeModel> college=collegeRepo.findById(id);
-		CollegeResponceDto responce=modelMapper.map(college, CollegeResponceDto.class);
-		
+
+		Optional<CollegeModel> college = collegeRepo.findById(id);
+		CollegeResponceDto responce = modelMapper.map(college, CollegeResponceDto.class);
+
 		return responce;
 
 	}
-	
-	public CollegeResponceDto updateById(CollegeRequestDto crd,Integer id) {
-		CollegeModel existing = collegeRepo.findById(id)
-	            .orElseThrow(() -> new RuntimeException("College not found"));
-		
-		  existing.setCollege_Name(crd.getCollege_Name());
-		    existing.setCollege_location(crd.getCollege_location());
-		    
-		    CollegeModel updated = collegeRepo.save(existing);
-		    
-		    CollegeResponceDto response =
-		            modelMapper.map(updated, CollegeResponceDto.class);
-		    
-		    return response;
-		
+
+	public CollegeResponceDto updateById(CollegeRequestDto crd, Integer id) {
+		CollegeModel existing = collegeRepo.findById(id).orElseThrow(() -> new RuntimeException("College not found"));
+
+		existing.setCollege_Name(crd.getCollege_Name());
+		existing.setCollege_location(crd.getCollege_location());
+
+		CollegeModel updated = collegeRepo.save(existing);
+
+		CollegeResponceDto response = modelMapper.map(updated, CollegeResponceDto.class);
+
+		return response;
+
 	}
-	
+
+	public String deleteById(Integer id) {
+		CollegeModel existing = collegeRepo.findById(id)
+				.orElseThrow(() -> new RuntimeException("college id is not fount"));
+
+		collegeRepo.delete(existing);
+		return "deleted sucessfully";
+
+	}
 
 }

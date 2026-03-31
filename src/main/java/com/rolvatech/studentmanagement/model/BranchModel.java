@@ -28,7 +28,7 @@ public class BranchModel {
 	@ManyToOne
 	@JoinColumn(name = "college_id")
 	private CollegeModel collegeModel;
-	@OneToMany(mappedBy = "branchModel", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "branchModel", cascade = CascadeType.ALL,orphanRemoval = true)
 	List<StudentsModel> students;
 
 }

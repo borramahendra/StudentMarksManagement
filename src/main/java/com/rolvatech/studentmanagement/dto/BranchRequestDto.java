@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BranchRequestDto {
+	private Integer branch_id;
 	private String branch_name;
 	
 	private Integer college_id;

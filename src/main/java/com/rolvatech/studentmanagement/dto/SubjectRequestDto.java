@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubjectRequestDto {
+	private Integer subject_id;
 	private String Subject_name;
 	private Integer branch_id;
 	private String branch_name;

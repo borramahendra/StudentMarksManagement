@@ -2,6 +2,7 @@ package com.rolvatech.studentmanagement.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,13 +33,19 @@ public class CollegeController {
 	}
 	
 	@GetMapping("/GetByCollegeId/{id}")
-	public CollegeResponceDto getCollegeById(@PathVariable("id") int id) {
+	public CollegeResponceDto getCollegeById(@PathVariable("id") Integer id) {
 		return CollegeService.getById(id);
 	}
 	
-	@PutMapping("/updateById/{id}")
-	public CollegeResponceDto updateById(@RequestBody CollegeRequestDto crd,@PathVariable("id") int id) {
+	@PutMapping("/updateCollegeById/{id}")
+	public CollegeResponceDto updateById(@RequestBody CollegeRequestDto crd,@PathVariable("id") Integer id) {
 		return CollegeService.updateById(crd, id);
+		
+	}
+	
+	@DeleteMapping("/deleteCollegeById/{id}")
+	public String deleteById(@PathVariable("id") Integer id) {
+		return CollegeService.deleteById(id);
 		
 	}
 

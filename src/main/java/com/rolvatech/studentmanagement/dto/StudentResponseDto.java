@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentResponseDto {
+	 Integer student_id;
 	private String Student_name;
 	private String Student_email;
 	

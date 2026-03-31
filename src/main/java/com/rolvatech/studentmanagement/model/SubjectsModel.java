@@ -28,7 +28,7 @@ public class SubjectsModel {
 	@ManyToOne
 	@JoinColumn(name = "branch_id")
 	private BranchModel branchModel;
-	@OneToMany(mappedBy = "subjectsModel",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "subjectsModel",cascade = CascadeType.ALL,orphanRemoval = true)
 	List<MarksModel> marks;
 
 }

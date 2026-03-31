@@ -56,20 +56,31 @@ public class SubjectService {
 
 	}
 
-	public SubjectResponceDto getById(int id) {
+	public SubjectResponceDto getById(Integer id) {
 		SubjectsModel subjectsModel = subjectRepo.findById(id).orElseThrow();
 		SubjectResponceDto subjectResponceDto = modelMapper.map(subjectsModel, SubjectResponceDto.class);
 		return subjectResponceDto;
 	}
 	
-	public SubjectResponceDto updateById(SubjectRequestDto srd,int id) {
+	public SubjectResponceDto updateById(SubjectRequestDto srd,Integer id) {
 		SubjectsModel existing=subjectRepo.findById(id).orElseThrow();
 		existing.setSubject_name(srd.getSubject_name());
+		System.out.println("DTO subject_name: " + srd.getSubject_name());
 		SubjectsModel saved=subjectRepo.save(existing);
 		
 		SubjectResponceDto response=modelMapper.map(saved, SubjectResponceDto.class);
 		
 		return response;
+	}
+	
+	
+	public String deleteById(Integer id) {
+		
+		SubjectsModel existing =subjectRepo.findById(id).orElseThrow();
+		subjectRepo.delete(existing);
+		
+		return "deleted sucessfully";
+		
 	}
 
 }
