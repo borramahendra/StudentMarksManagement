@@ -25,7 +25,7 @@ public class CollegeModel {
 	private Integer college_id;
 	private String college_Name;
 	private String college_location;
-	@OneToMany(mappedBy = "collegeModel",cascade = CascadeType.ALL) // ✅ collection
+	@OneToMany(mappedBy = "collegeModel",cascade = CascadeType.ALL,orphanRemoval = true) // ✅ collection
 	private List<BranchModel> branches;
 
 }

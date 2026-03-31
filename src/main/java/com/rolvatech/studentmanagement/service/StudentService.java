@@ -59,10 +59,30 @@ public class StudentService {
 		return studentsDto;
 	}
 
-	public StudentResponseDto getById(int id) {
+	public StudentResponseDto getById(Integer id) {
 		StudentsModel studentsModel = studentsRepo.findById(id).orElseThrow();
 		StudentResponseDto response = modelMapper.map(studentsModel, StudentResponseDto.class);
 		return response;
+	}
+	
+	public StudentResponseDto updateById(StudentRequestDto srd,Integer id) {
+		
+		StudentsModel existing=studentsRepo.findById(id).orElseThrow();
+		existing.setStudent_name(srd.getStudent_name());
+		existing.setStudent_email(srd.getStudent_email());
+		StudentsModel saved=studentsRepo.save(existing);
+		
+		StudentResponseDto response=modelMapper.map(saved, StudentResponseDto.class);
+		
+		return response;
+		
+	}
+	
+	public String deleteById(Integer id) {
+		StudentsModel existing =studentsRepo.findById(id).orElseThrow();
+		studentsRepo.delete(existing);
+		
+		return "deleted sucessfully";		
 	}
 
 }

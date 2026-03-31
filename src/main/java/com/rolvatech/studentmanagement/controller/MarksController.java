@@ -2,9 +2,11 @@ package com.rolvatech.studentmanagement.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,9 +35,20 @@ public class MarksController {
 	}
 
 	@GetMapping("/getByMarksId/{id}")
-	public MarksResponseDto getById(@PathVariable("id") int id) {
+	public MarksResponseDto getById(@PathVariable("id") Integer id) {
 		return marksService.getById(id);
 
+	}
+	
+	@PutMapping("/updateMarksById/{id}")
+	public MarksResponseDto updateById(@RequestBody MarksRequestdto mrd,@PathVariable("id") Integer id) {
+		return marksService.updateById(mrd, id);
+		
+	}
+	
+	@DeleteMapping("deleteMarksById/{id}")
+	public String deleteById(@PathVariable("id") Integer id) {
+		return marksService.deleteById(id);
 	}
 
 }

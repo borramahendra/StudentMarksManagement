@@ -30,7 +30,7 @@ public class StudentsModel {
 	@ManyToOne
 	@JoinColumn(name = "branch_id")
 	private BranchModel branchModel;
-	@OneToMany(mappedBy = "studentsModel",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "studentsModel",cascade = CascadeType.ALL,orphanRemoval = true)
 	List<MarksModel> marks;
 
 }
