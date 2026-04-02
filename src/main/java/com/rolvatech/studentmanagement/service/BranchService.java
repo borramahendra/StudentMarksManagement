@@ -5,9 +5,6 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.rolvatech.studentmanagement.dto.BranchRequestDto;
 import com.rolvatech.studentmanagement.dto.BranchResponceDto;
 import com.rolvatech.studentmanagement.model.BranchModel;
@@ -28,7 +25,7 @@ public class BranchService {
 	public BranchResponceDto addBranches(BranchRequestDto brt) {
 		
 		CollegeModel college=collegeRepo.findById(brt.getCollege_id())
-				.orElseThrow(() -> new RuntimeException("College not found with id: " + brt.getCollege_id()));
+				.orElseThrow(() -> new RuntimeException("College not found with this id: " + brt.getCollege_id()));
 		
 		
 		BranchModel branchModel=modelMapper.map(brt, BranchModel.class);
@@ -64,7 +61,8 @@ public class BranchService {
 	}
 	
 	public BranchResponceDto getById(Integer id) {
-		BranchModel branchModel=BranchRepo.findById(id).orElseThrow();
+		BranchModel branchModel=BranchRepo.findById(id)
+				.orElseThrow(() -> new RuntimeException("Branch not found with this id: " + id));
 		
 		BranchResponceDto resopnse=modelMapper.map(branchModel, BranchResponceDto.class);
 		
@@ -73,7 +71,8 @@ public class BranchService {
 	
 	public BranchResponceDto updateById(BranchRequestDto brt,Integer id) {
 		
-		BranchModel existing=BranchRepo.findById(id).orElseThrow();
+		BranchModel existing=BranchRepo.findById(id)
+				.orElseThrow(() -> new RuntimeException("Branch not found with this id: " + id));
 		existing.setBranch_name(brt.getBranch_name());
 		BranchModel saved=BranchRepo.save(existing);
 		
@@ -83,7 +82,8 @@ public class BranchService {
 	}
 
 	public String deleteById(Integer id) {
-		BranchModel existing=BranchRepo.findById(id).orElseThrow();
+		BranchModel existing=BranchRepo.findById(id)
+				.orElseThrow(() -> new RuntimeException("Branch not found with this id: " + id));
 		BranchRepo.delete(existing);
 		
 		return "deleted sucessfully";

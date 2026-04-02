@@ -2,8 +2,6 @@ package com.rolvatech.studentmanagement.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,7 +44,8 @@ public class CollegeService {
 
 	public CollegeResponceDto getById(Integer id) {
 
-		Optional<CollegeModel> college = collegeRepo.findById(id);
+		CollegeModel college = collegeRepo.findById(id)
+				.orElseThrow(() -> new RuntimeException("College not found with this id : " + id));;
 		CollegeResponceDto responce = modelMapper.map(college, CollegeResponceDto.class);
 
 		return responce;
@@ -54,7 +53,8 @@ public class CollegeService {
 	}
 
 	public CollegeResponceDto updateById(CollegeRequestDto crd, Integer id) {
-		CollegeModel existing = collegeRepo.findById(id).orElseThrow(() -> new RuntimeException("College not found"));
+		CollegeModel existing = collegeRepo.findById(id)
+				.orElseThrow(() -> new RuntimeException("College not found with this id : " + id));
 
 		existing.setCollege_Name(crd.getCollege_Name());
 		existing.setCollege_location(crd.getCollege_location());
@@ -69,7 +69,7 @@ public class CollegeService {
 
 	public String deleteById(Integer id) {
 		CollegeModel existing = collegeRepo.findById(id)
-				.orElseThrow(() -> new RuntimeException("college id is not fount"));
+				.orElseThrow(() -> new RuntimeException("College not found with this id : " + id));
 
 		collegeRepo.delete(existing);
 		return "deleted sucessfully";

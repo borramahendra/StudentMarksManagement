@@ -1,5 +1,7 @@
 package com.rolvatech.studentmanagement.dto;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,12 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentResponseDto {
-	 Integer student_id;
-	private String Student_name;
-	private String studentEmail;
+public class EmailScheduleRequestDto {
 	
-	private Integer branch_id;
-	private String branch_name;
+	private Integer student_id;
+	private LocalDateTime schdule;
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rolvatech.studentmanagement.dto.LoginRequestDto;
 import com.rolvatech.studentmanagement.dto.StudentRequestDto;
 import com.rolvatech.studentmanagement.dto.StudentResponseDto;
 import com.rolvatech.studentmanagement.service.StudentService;
@@ -48,6 +49,12 @@ public class StudentController {
 	public String deleteById(@PathVariable("id") Integer id) {
 		
 		return studentService.deleteById(id);
+		
+	}
+	
+	@PostMapping("/login")
+	public String login(@RequestBody LoginRequestDto request) {
+		return studentService.login(request);
 		
 	}
 

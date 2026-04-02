@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class StudentRequestDto {
 	private String Student_name;
-	private String Student_email;
+	private String studentEmail;
+	private String studentPassword;
 	
 	private Integer branch_id;
 	private String branch_name;
