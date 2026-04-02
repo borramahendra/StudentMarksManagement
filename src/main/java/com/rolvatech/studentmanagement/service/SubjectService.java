@@ -24,7 +24,7 @@ public class SubjectService {
 
 	public SubjectResponceDto addSubjects(SubjectRequestDto srd) {
 		BranchModel branchModel = BranchRepo.findById(srd.getBranch_id())
-				.orElseThrow(() -> new RuntimeException("College not found with id: " + srd.getBranch_id()));
+				.orElseThrow(() -> new RuntimeException("Branch not found with id: " + srd.getBranch_id()));
 		SubjectsModel subjectsModel = modelMapper.map(branchModel, SubjectsModel.class);
 		subjectsModel.setSubject_name(srd.getSubject_name());
 		subjectsModel.setBranchModel(branchModel);
@@ -57,13 +57,15 @@ public class SubjectService {
 	}
 
 	public SubjectResponceDto getById(Integer id) {
-		SubjectsModel subjectsModel = subjectRepo.findById(id).orElseThrow();
+		SubjectsModel subjectsModel = subjectRepo.findById(id)
+				.orElseThrow(()-> new RuntimeException("Subject not found with this ID :" + id));
 		SubjectResponceDto subjectResponceDto = modelMapper.map(subjectsModel, SubjectResponceDto.class);
 		return subjectResponceDto;
 	}
 	
 	public SubjectResponceDto updateById(SubjectRequestDto srd,Integer id) {
-		SubjectsModel existing=subjectRepo.findById(id).orElseThrow();
+		SubjectsModel existing=subjectRepo.findById(id)
+				.orElseThrow(()-> new RuntimeException("Subject not found with this ID :" + id));
 		existing.setSubject_name(srd.getSubject_name());
 		System.out.println("DTO subject_name: " + srd.getSubject_name());
 		SubjectsModel saved=subjectRepo.save(existing);
@@ -76,7 +78,8 @@ public class SubjectService {
 	
 	public String deleteById(Integer id) {
 		
-		SubjectsModel existing =subjectRepo.findById(id).orElseThrow();
+		SubjectsModel existing =subjectRepo.findById(id)
+				.orElseThrow(()-> new RuntimeException("Subject not found with this ID :" + id));
 		subjectRepo.delete(existing);
 		
 		return "deleted sucessfully";

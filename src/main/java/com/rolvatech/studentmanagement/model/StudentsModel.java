@@ -3,6 +3,7 @@ package com.rolvatech.studentmanagement.model;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,11 +27,15 @@ public class StudentsModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer student_id;
 	private String Student_name;
-	private String Student_email;
+	@Column(name="student_email")
+	private String studentEmail;
+	private String studentPassword;
 	@ManyToOne
 	@JoinColumn(name = "branch_id")
 	private BranchModel branchModel;
 	@OneToMany(mappedBy = "studentsModel",cascade = CascadeType.ALL,orphanRemoval = true)
 	List<MarksModel> marks;
+	@OneToMany(mappedBy = "studentsModel",cascade = CascadeType.ALL,orphanRemoval = true)
+	List<EmailModel> emails;
 
 }

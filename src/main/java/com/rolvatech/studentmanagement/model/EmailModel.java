@@ -1,31 +1,35 @@
 package com.rolvatech.studentmanagement.model;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Entity
-@Table(name = "college_Name")
+@Table(name="EmailSchdule")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CollegeModel {
-
+public class EmailModel {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer college_id;
-	private String college_Name;
-	private String college_location;
-	@OneToMany(mappedBy = "collegeModel",cascade = CascadeType.ALL,orphanRemoval = true) 
-	private List<BranchModel> branches;
+	private Integer email_id;
+	private String  toEmail;
+	private String subject;
+	private String text;
+	private LocalDateTime schdule;
+	private boolean status=false;
+	@ManyToOne
+	@JoinColumn(name="student_id")
+	private StudentsModel studentsModel;
+	
 
 }

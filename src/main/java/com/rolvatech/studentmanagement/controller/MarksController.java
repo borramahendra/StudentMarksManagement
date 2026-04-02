@@ -1,6 +1,7 @@
 package com.rolvatech.studentmanagement.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rolvatech.studentmanagement.dto.EmailScheduleRequestDto;
 import com.rolvatech.studentmanagement.dto.MarksRequestdto;
 import com.rolvatech.studentmanagement.dto.MarksResponseDto;
 import com.rolvatech.studentmanagement.service.MarksService;
@@ -46,9 +48,20 @@ public class MarksController {
 		
 	}
 	
-	@DeleteMapping("deleteMarksById/{id}")
+	@DeleteMapping("/deleteMarksById/{id}")
 	public String deleteById(@PathVariable("id") Integer id) {
 		return marksService.deleteById(id);
+	}
+	
+	@PostMapping("/sendEmail/{id}")
+	public String marksReportCard(@PathVariable Integer id,@RequestBody EmailScheduleRequestDto request) {
+		return marksService.marksReportCard(id,request.getSchdule());
+		
+	}
+	
+	@PostMapping("/sendMailtoAllStudents")
+	public String sendMailToAllStudents(@RequestBody EmailScheduleRequestDto request) {
+		return marksService.sendMailToAllStudents(request.getSchdule());
 	}
 
 }
